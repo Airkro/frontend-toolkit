@@ -1,0 +1,38 @@
+{
+  "name": "regexp-toolset",
+  "version": "0.0.0",
+  "license": "MIT",
+  "private": true,
+  "author": {
+    "name": "Eric Chen",
+    "email": "airkro@qq.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/airkro/regexp-toolset.git"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "optionalDependencies": {
+    "@nice-move/eslint-config-base": "^0.0.3",
+    "@nice-move/prettier-config": "^0.0.0",
+    "ava": "^2.0.0",
+    "eslint": "^5.16.0",
+    "eslint-plugin-ava": "^7.0.0",
+    "eslint-plugin-node": "^9.1.0",
+    "husky": "^2.4.0",
+    "lint-staged": "^8.1.7",
+    "prettier": "^1.17.1"
+  },
+  "scripts": {
+    "format": "lint-staged",
+    "test": "ava --verbose"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged && ava --verbose"
+    }
+  },
+  "prettier": "@nice-move/prettier-config"
+}

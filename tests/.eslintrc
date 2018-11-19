@@ -1,0 +1,14 @@
+{
+  "extends": "plugin:ava/recommended",
+  "rules": {
+    "node/no-extraneous-require": [
+      "error",
+      {
+        "allowModules": [
+          "ext-to-regexp",
+          "slash-to-regexp"
+        ]
+      }
+    ]
+  }
+}

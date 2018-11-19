@@ -1,0 +1,32 @@
+{
+  "name": "slash-to-regexp",
+  "version": "0.0.0",
+  "description": "Convert path with slash into regexp",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "license": "MIT",
+  "author": {
+    "name": "Eric Chen",
+    "email": "airkro@qq.com"
+  },
+  "engines": {
+    "node": ">=6.17.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/airkro/regexp-toolset",
+    "directory": "packages/slash-to-regexp"
+  },
+  "keywords": [
+    "backslash",
+    "glob",
+    "match",
+    "normalize",
+    "path",
+    "posix",
+    "regex",
+    "regexp",
+    "slash",
+    "webpack"
+  ]
+}
