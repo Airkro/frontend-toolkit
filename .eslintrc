@@ -1,0 +1,16 @@
+{
+  "extends": [
+    "@nice-move/eslint-config-base",
+    "plugin:node/recommended"
+  ],
+  "rules": {
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "optionalDependencies": [
+          "./tests/*"
+        ]
+      }
+    ]
+  }
+}
