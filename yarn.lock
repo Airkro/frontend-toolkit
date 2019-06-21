@@ -551,10 +551,10 @@ atob@^2.1.1:
   resolved "https://registry.npm.taobao.org/atob/download/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha1-bZUX654DDSQ2ZmZR6GvZ9vE1M8k=
 
-ava@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.npm.taobao.org/ava/download/ava-2.0.0.tgz#265f9a094f83d0a78c05654e37302645d59ca1fa"
-  integrity sha1-Jl+aCU+D0KeMBWVONzAmRdWcofo=
+ava@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.npm.taobao.org/ava/download/ava-2.1.0.tgz#158c5cdf48d1556caf0a9fdf96b61af9e566c153"
+  integrity sha1-FYxc30jRVWyvCp/flrYa+eVmwVM=
   dependencies:
     "@ava/babel-preset-stage-4" "^3.0.0"
     "@ava/babel-preset-transform-test-files" "^5.0.0"
@@ -572,7 +572,7 @@ ava@^2.0.0:
     arrify "^2.0.1"
     bluebird "^3.5.5"
     chalk "^2.4.2"
-    chokidar "^3.0.0"
+    chokidar "^3.0.1"
     chunkd "^1.0.0"
     ci-parallel-vars "^1.0.0"
     clean-stack "^2.1.0"
@@ -586,7 +586,7 @@ ava@^2.0.0:
     currently-unhandled "^0.4.1"
     debug "^4.1.1"
     del "^4.1.1"
-    dot-prop "^5.0.0"
+    dot-prop "^5.0.1"
     emittery "^0.4.1"
     empower-core "^1.2.0"
     equal-length "^1.0.0"
@@ -611,7 +611,7 @@ ava@^2.0.0:
     md5-hex "^3.0.0"
     meow "^5.0.0"
     micromatch "^4.0.2"
-    ms "^2.1.1"
+    ms "^2.1.2"
     observable-to-promise "^1.0.0"
     ora "^3.4.0"
     package-hash "^4.0.0"
@@ -852,7 +852,7 @@ chevrotain@4.1.1:
   dependencies:
     regexp-to-ast "0.3.5"
 
-chokidar@^3.0.0:
+chokidar@^3.0.1:
   version "3.0.1"
   resolved "https://registry.npm.taobao.org/chokidar/download/chokidar-3.0.1.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fchokidar%2Fdownload%2Fchokidar-3.0.1.tgz#98fe9aa476c55d9aea7841d6325ffdb30e95b40c"
   integrity sha1-mP6apHbFXZrqeEHWMl/9sw6VtAw=
@@ -1317,12 +1317,12 @@ dot-prop@^4.1.0:
   dependencies:
     is-obj "^1.0.0"
 
-dot-prop@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.npm.taobao.org/dot-prop/download/dot-prop-5.0.0.tgz#64b7968af349c3a9f966aa12658dbd5829f6b953"
-  integrity sha1-ZLeWivNJw6n5ZqoSZY29WCn2uVM=
+dot-prop@^5.0.1:
+  version "5.1.0"
+  resolved "https://registry.npm.taobao.org/dot-prop/download/dot-prop-5.1.0.tgz#bdd8c986a77b83e3fca524e53786df916cabbd8a"
+  integrity sha1-vdjJhqd7g+P8pSTlN4bfkWyrvYo=
   dependencies:
-    is-obj "^1.0.0"
+    is-obj "^2.0.0"
 
 duplexer3@^0.1.4:
   version "0.1.4"
@@ -1452,10 +1452,10 @@ eslint-module-utils@^2.4.0:
     debug "^2.6.8"
     pkg-dir "^2.0.0"
 
-eslint-plugin-ava@^7.0.0:
-  version "7.0.0"
-  resolved "https://registry.npm.taobao.org/eslint-plugin-ava/download/eslint-plugin-ava-7.0.0.tgz#362c65533078b6d41dfc586d93b0e928f19a95a8"
-  integrity sha1-NixlUzB4ttQd/Fhtk7DpKPGalag=
+eslint-plugin-ava@^7.1.0:
+  version "7.1.0"
+  resolved "https://registry.npm.taobao.org/eslint-plugin-ava/download/eslint-plugin-ava-7.1.0.tgz#ad2965c8a2b41e1d5e1c9477330ac9faa357b171"
+  integrity sha1-rSllyKK0Hh1eHJR3MwrJ+qNXsXE=
   dependencies:
     deep-strict-equal "^0.2.0"
     enhance-visitors "^1.0.0"
@@ -1809,11 +1809,6 @@ fill-range@^7.0.1:
   dependencies:
     to-regex-range "^5.0.1"
 
-find-parent-dir@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.npm.taobao.org/find-parent-dir/download/find-parent-dir-0.3.0.tgz#33c44b429ab2b2f0646299c5f9f718f376ff8d54"
-  integrity sha1-M8RLQpqysvBkYpnF+fcY83b/jVQ=
-
 find-up@^2.0.0, find-up@^2.1.0:
   version "2.1.0"
   resolved "https://registry.npm.taobao.org/find-up/download/find-up-2.1.0.tgz#45d1b7e506c717ddd482775a2b77920a3c0c57a7"
@@ -2098,10 +2093,10 @@ http-cache-semantics@^4.0.0:
   resolved "https://registry.npm.taobao.org/http-cache-semantics/download/http-cache-semantics-4.0.3.tgz#495704773277eeef6e43f9ab2c2c7d259dda25c5"
   integrity sha1-SVcEdzJ37u9uQ/mrLCx9JZ3aJcU=
 
-husky@^2.4.0:
-  version "2.4.0"
-  resolved "https://registry.npm.taobao.org/husky/download/husky-2.4.0.tgz#1bac7c44588f6e91f808b72efc82d24a57194f36"
-  integrity sha1-G6x8RFiPbpH4CLcu/ILSSlcZTzY=
+husky@^2.4.1:
+  version "2.4.1"
+  resolved "https://registry.npm.taobao.org/husky/download/husky-2.4.1.tgz#dd00f9646f8693b93f7b3a12ba4be00be0eff7ab"
+  integrity sha1-3QD5ZG+Gk7k/ezoSukvgC+Dv96s=
   dependencies:
     cosmiconfig "^5.2.0"
     execa "^1.0.0"
@@ -2390,6 +2385,11 @@ is-obj@^1.0.0, is-obj@^1.0.1:
   resolved "https://registry.npm.taobao.org/is-obj/download/is-obj-1.0.1.tgz#3e4729ac1f5fde025cd7d83a896dab9f4f67db0f"
   integrity sha1-PkcprB9f3gJc19g6iW2rn09n2w8=
 
+is-obj@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.npm.taobao.org/is-obj/download/is-obj-2.0.0.tgz#473fb05d973705e3fd9620545018ca8e22ef4982"
+  integrity sha1-Rz+wXZc3BeP9liBUUBjKjiLvSYI=
+
 is-observable@^1.1.0:
   version "1.1.0"
   resolved "https://registry.npm.taobao.org/is-observable/download/is-observable-1.1.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fis-observable%2Fdownload%2Fis-observable-1.1.0.tgz#b3e986c8f44de950867cab5403f5a3465005975e"
@@ -2641,10 +2641,10 @@ levn@^0.3.0, levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
-lint-staged@^8.1.7:
-  version "8.1.7"
-  resolved "https://registry.npm.taobao.org/lint-staged/download/lint-staged-8.1.7.tgz#a8988bc83bdffa97d04adb09dbc0b1f3a58fa6fc"
-  integrity sha1-qJiLyDvf+pfQStsJ28Cx86WPpvw=
+lint-staged@^8.2.1:
+  version "8.2.1"
+  resolved "https://registry.npm.taobao.org/lint-staged/download/lint-staged-8.2.1.tgz#752fcf222d9d28f323a3b80f1e668f3654ff221f"
+  integrity sha1-dS/PIi2dKPMjo7gPHmaPNlT/Ih8=
   dependencies:
     chalk "^2.3.1"
     commander "^2.14.1"
@@ -2653,7 +2653,6 @@ lint-staged@^8.1.7:
     dedent "^0.7.0"
     del "^3.0.0"
     execa "^1.0.0"
-    find-parent-dir "^0.3.0"
     g-status "^2.0.2"
     is-glob "^4.0.0"
     is-windows "^1.0.2"
@@ -2746,6 +2745,11 @@ load-json-file@^5.2.0:
     pify "^4.0.1"
     strip-bom "^3.0.0"
     type-fest "^0.3.0"
+
+localStorage@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.npm.taobao.org/localStorage/download/localStorage-1.0.4.tgz#57dfa28084385f81431accb8ae24b196398223f7"
+  integrity sha1-V9+igIQ4X4FDGsy4riSxljmCI/c=
 
 locate-path@^2.0.0:
   version "2.0.0"
@@ -3062,6 +3066,11 @@ ms@^2.1.1:
   version "2.1.1"
   resolved "https://registry.npm.taobao.org/ms/download/ms-2.1.1.tgz#30a5864eb3ebb0a66f2ebe6d727af06a09d86e0a"
   integrity sha1-MKWGTrPrsKZvLr5tcnrwagnYbgo=
+
+ms@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.npm.taobao.org/ms/download/ms-2.1.2.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fms%2Fdownload%2Fms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
+  integrity sha1-0J0fNXtEP0kzgqjrPM0YOHKuYAk=
 
 mute-stream@0.0.7:
   version "0.0.7"
@@ -3506,10 +3515,15 @@ prettier-plugin-toml@^0.3.1:
     "@toml-tools/parser" "^0.3.1"
     prettier "^1.16.0"
 
-prettier@^1.16.0, prettier@^1.17.1:
+prettier@^1.16.0:
   version "1.17.1"
   resolved "https://registry.npm.taobao.org/prettier/download/prettier-1.17.1.tgz#ed64b4e93e370cb8a25b9ef7fef3e4fd1c0995db"
   integrity sha1-7WS06T43DLiiW573/vPk/RwJlds=
+
+prettier@^1.18.2:
+  version "1.18.2"
+  resolved "https://registry.npm.taobao.org/prettier/download/prettier-1.18.2.tgz#6823e7c5900017b4bd3acf46fe9ac4b4d7bda9ea"
+  integrity sha1-aCPnxZAAF7S9Os9G/prEtNe9qeo=
 
 pretty-ms@^5.0.0:
   version "5.0.0"
