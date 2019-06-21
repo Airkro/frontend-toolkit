@@ -1,5 +1,5 @@
 {
-  "name": "regexp-toolset",
+  "name": "frontend-toolkit",
   "version": "0.0.0",
   "license": "MIT",
   "private": true,
@@ -9,21 +9,24 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/airkro/regexp-toolset.git"
+    "url": "https://github.com/airkro/frontend-toolkit.git"
   },
   "workspaces": [
     "packages/*"
   ],
+  "devDependencies": {
+    "localStorage": "^1.0.4"
+  },
   "optionalDependencies": {
     "@nice-move/eslint-config-base": "^0.0.3",
     "@nice-move/prettier-config": "^0.0.0",
-    "ava": "^2.0.0",
-    "eslint": "^5.16.0",
-    "eslint-plugin-ava": "^7.0.0",
+    "ava": "^2.1.0",
+    "eslint": "^6.0.1",
+    "eslint-plugin-ava": "^7.1.0",
     "eslint-plugin-node": "^9.1.0",
-    "husky": "^2.4.0",
-    "lint-staged": "^8.1.7",
-    "prettier": "^1.17.1"
+    "husky": "^2.5.0",
+    "lint-staged": "^8.2.1",
+    "prettier": "^1.18.2"
   },
   "scripts": {
     "format": "lint-staged",

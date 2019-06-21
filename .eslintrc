@@ -4,6 +4,7 @@
     "plugin:node/recommended"
   ],
   "rules": {
+    "implicit-arrow-linebreak": "off",
     "import/no-extraneous-dependencies": [
       "error",
       {

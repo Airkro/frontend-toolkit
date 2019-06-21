@@ -3,7 +3,7 @@
 const ext2regexp = require('ext-to-regexp');
 const test = require('ava');
 
-test('Initialize example', t => {
+test('Initialize', t => {
   const html = ext2regexp('html');
   const jsx = ext2regexp('js', 'jsx');
   const file = ext2regexp('toml', 'yaml', 'json');
