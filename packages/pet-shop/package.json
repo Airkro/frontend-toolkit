@@ -1,6 +1,28 @@
 {
   "name": "pet-shop",
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "description": "A simple wrapper of Web Storage API",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "author": {
+    "name": "Eric Chen",
+    "email": "airkro@qq.com"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/airkro/frontend-toolkit",
+    "directory": "packages/pet-shop"
+  },
+  "keywords": [
+    "data",
+    "cache",
+    "store",
+    "config",
+    "storage",
+    "localStorage",
+    "sessionStorage"
+  ]
 }

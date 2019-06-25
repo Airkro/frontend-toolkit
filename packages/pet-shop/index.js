@@ -23,6 +23,25 @@ module.exports = function PetShop({ storage, namespace }) {
         value(key) {
           storage.removeItem(`${namespace}.${key}`);
         }
+      },
+      keys: {
+        value() {
+          const keys = [];
+          for (let i = 0; i < storage.length; i += 1) {
+            const key = storage.key(i);
+            if (key.startsWith(`${namespace}.`)) {
+              keys.push(key);
+            }
+          }
+          return keys;
+        }
+      },
+      clear: {
+        value() {
+          this.keys().forEach(key => {
+            storage.removeItem(key);
+          });
+        }
       }
     }
   );
