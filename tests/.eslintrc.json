@@ -5,6 +5,7 @@
       "error",
       {
         "allowModules": [
+          "pet-shop",
           "ext-to-regexp",
           "slash-to-regexp"
         ]
