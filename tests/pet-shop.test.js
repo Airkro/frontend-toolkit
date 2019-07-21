@@ -1,9 +1,11 @@
 // @ts-nocheck
-// eslint-disable-next-line import/no-extraneous-dependencies, node/no-extraneous-require
+const test = require('ava');
+// eslint-disable-next-line import/no-extraneous-dependencies
 const PetShop = require('pet-shop');
 // eslint-disable-next-line node/no-unpublished-require
-const storage = require('localStorage');
-const test = require('ava');
+const StorageShim = require('node-storage-shim');
+
+const storage = new StorageShim();
 
 test('Base Usage', t => {
   const namespace = 'test';
