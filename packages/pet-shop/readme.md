@@ -21,6 +21,7 @@ npm install pet-shop
 Usage
 
 ```js
+// plain-text store
 const store = PetShop({
   namespace: 'pet-shop',
   storage: localStorage
@@ -28,8 +29,26 @@ const store = PetShop({
 
 store.set('abc', 'xyz');
 store.get('abc'); // output: 'xyz'
-store.size; // output: 0
+store.size; // output: 1
 localStorage.getItem('pet-shop.abc'); // output: 'xyz'
+
+store.remove('abc');
+
+store.has('abc'); // output: false
+```
+
+```js
+// json store
+const store = PetShop({
+  namespace: 'pet-shop',
+  storage: localStorage,
+  json: true
+});
+
+store.set('abc', ['xyz']);
+store.get('abc'); // output: ['xyz']
+store.size; // output: 1
+localStorage.getItem('pet-shop.abc'); // output: ['xyz']
 
 store.remove('abc');
 

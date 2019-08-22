@@ -1,29 +1,46 @@
 'use strict';
 
-module.exports = function PetShop({ storage, namespace }) {
+module.exports = function PetShop({ storage, namespace, json = false }) {
   return Object.defineProperties(
     {},
     {
       namespace: { value: namespace, enumerable: true },
       get: {
         enumerable: true,
-        value(key) {
-          return storage.getItem(`${namespace}.${key}`) || undefined;
-        }
+        value: json
+          ? function get(key) {
+            const raw = storage.getItem(`${namespace}.${key}`);
+            return raw !== null ? JSON.parse(raw) : undefined;
+          }
+          : function get(key) {
+            const raw = storage.getItem(`${namespace}.${key}`);
+            return raw !== null ? raw : undefined;
+          }
       },
       set: {
         enumerable: true,
-        value(key, value) {
-          if (value === undefined) {
-            this.remove(key);
-          } else {
-            storage.setItem(`${namespace}.${key}`, value);
+        value: json
+          ? function set(key, value) {
+            if (value === undefined) {
+              this.remove(key);
+            } else {
+              storage.setItem(`${namespace}.${key}`, JSON.stringify(value));
+            }
           }
-        }
+          : function set(key, value) {
+            if (value === undefined || value === null) {
+              this.remove(key);
+            } else {
+              if (typeof value !== 'string') {
+                throw new TypeError('The Value should be a string');
+              }
+              storage.setItem(`${namespace}.${key}`, value);
+            }
+          }
       },
       remove: {
         enumerable: true,
-        value(key) {
+        value: function remove(key) {
           storage.removeItem(`${namespace}.${key}`);
         }
       },
@@ -54,17 +71,11 @@ module.exports = function PetShop({ storage, namespace }) {
       },
       valueOf: {
         enumerable: true,
-        value() {
+        value: function valueOf() {
           return this.keys.reduce(
             (io, key) => ({ [key]: this.get(key), ...io }),
             {}
           );
-        }
-      },
-      stringify: {
-        enumerable: true,
-        value(replacer, space) {
-          return JSON.stringify(this.valueOf(), replacer, space);
         }
       },
       size: {
@@ -75,13 +86,13 @@ module.exports = function PetShop({ storage, namespace }) {
       },
       has: {
         enumerable: true,
-        value(key) {
-          return this.get(key) !== undefined;
+        value: function has(key) {
+          return storage.getItem(`${namespace}.${key}`) !== null;
         }
       },
       clear: {
         enumerable: true,
-        value() {
+        value: function clear() {
           this.rawKeys.forEach(key => {
             storage.removeItem(key);
           });
