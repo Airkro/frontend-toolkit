@@ -1,8 +1,8 @@
 {
+  "private": true,
   "name": "frontend-toolkit",
   "version": "0.0.0",
   "license": "MIT",
-  "private": true,
   "author": {
     "name": "Eric Chen",
     "email": "airkro@qq.com"
@@ -10,6 +10,11 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/airkro/frontend-toolkit.git"
+  },
+  "files": [],
+  "scripts": {
+    "format": "lint-staged",
+    "test": "ava --verbose"
   },
   "workspaces": [
     "packages/*"
@@ -19,18 +24,14 @@
   },
   "optionalDependencies": {
     "@nice-move/eslint-config-base": "^0.0.4",
-    "@nice-move/prettier-config": "^0.0.2",
-    "ava": "^2.2.0",
-    "eslint": "^5.16.0",
-    "eslint-plugin-ava": "^7.1.0",
+    "@nice-move/prettier-config": "^0.0.3",
+    "ava": "^2.3.0",
+    "eslint": "^6.2.1",
+    "eslint-plugin-ava": "^8.0.0",
     "eslint-plugin-node": "^9.1.0",
-    "husky": "^3.0.1",
-    "lint-staged": "^9.2.0",
+    "husky": "^3.0.4",
+    "lint-staged": "^9.2.3",
     "prettier": "^1.18.2"
-  },
-  "scripts": {
-    "format": "lint-staged",
-    "test": "ava --verbose"
   },
   "husky": {
     "hooks": {

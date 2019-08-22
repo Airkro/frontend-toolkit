@@ -27,8 +27,8 @@ module.exports = function PetShop({ storage, namespace }) {
           storage.removeItem(`${namespace}.${key}`);
         }
       },
-      raw: {
-        value() {
+      rawKeys: {
+        get() {
           const keys = [];
           for (let i = 0; i < storage.length; i += 1) {
             const key = storage.key(i);
@@ -42,7 +42,7 @@ module.exports = function PetShop({ storage, namespace }) {
       keys: {
         enumerable: true,
         get() {
-          return this.raw().map(key =>
+          return this.rawKeys.map(key =>
             key.replace(new RegExp(`^${namespace}.`), ''));
         }
       },
@@ -61,10 +61,16 @@ module.exports = function PetShop({ storage, namespace }) {
           );
         }
       },
+      stringify: {
+        enumerable: true,
+        value(replacer, space) {
+          return JSON.stringify(this.valueOf(), replacer, space);
+        }
+      },
       size: {
         enumerable: true,
         get() {
-          return this.raw().length;
+          return this.rawKeys.length;
         }
       },
       has: {
@@ -76,7 +82,7 @@ module.exports = function PetShop({ storage, namespace }) {
       clear: {
         enumerable: true,
         value() {
-          this.keys.forEach(key => {
+          this.rawKeys.forEach(key => {
             storage.removeItem(key);
           });
         }

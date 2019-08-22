@@ -17,3 +17,21 @@ A simple wrapper of Web Storage API.
 ```bash
 npm install pet-shop
 ```
+
+Usage
+
+```js
+const store = PetShop({
+  namespace: 'pet-shop',
+  storage: localStorage
+});
+
+store.set('abc', 'xyz');
+store.get('abc'); // output: 'xyz'
+store.size; // output: 0
+localStorage.getItem('pet-shop.abc'); // output: 'xyz'
+
+store.remove('abc');
+
+store.has('abc'); // output: false
+```
