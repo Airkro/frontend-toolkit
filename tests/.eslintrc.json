@@ -1,13 +1,15 @@
 {
-  "extends": "plugin:ava/recommended",
+  "extends": [
+    "@nice-move/eslint-config-base",
+    "plugin:node/recommended",
+    "plugin:ava/recommended"
+  ],
   "rules": {
-    "node/no-extraneous-require": [
+    "import/no-extraneous-dependencies": [
       "error",
       {
-        "allowModules": [
-          "pet-shop",
-          "ext-to-regexp",
-          "slash-to-regexp"
+        "optionalDependencies": [
+          "./tests/*"
         ]
       }
     ]

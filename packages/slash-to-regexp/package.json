@@ -1,21 +1,11 @@
 {
   "name": "slash-to-regexp",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Convert path with slash into regexp",
-  "main": "index.js",
-  "types": "index.d.ts",
   "license": "MIT",
   "author": {
     "name": "Eric Chen",
     "email": "airkro@qq.com"
-  },
-  "engines": {
-    "node": ">=6.17.1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/airkro/regexp-toolset",
-    "directory": "packages/slash-to-regexp"
   },
   "keywords": [
     "backslash",
@@ -28,5 +18,16 @@
     "regexp",
     "slash",
     "webpack"
-  ]
+  ],
+  "homepage": "https://github.com/airkro/frontend-toolkit/tree/master/packages/slash-to-regexp",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/airkro/regexp-toolset",
+    "directory": "packages/slash-to-regexp"
+  },
+  "main": "index.js",
+  "engines": {
+    "node": ">=8"
+  },
+  "types": "index.d.ts"
 }

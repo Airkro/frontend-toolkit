@@ -23,9 +23,12 @@ npm install slash-to-regexp
 ```js
 const slashToRegexp = require('slash-to-regexp');
 
-const foo = slashToRegexp('node_modules/core-js');
-console.log(foo); // output /node_modules[\\/]core-js/
+slashToRegexp('node_modules/core-js');
+// output /node_modules[\\/]core-js/
 
-const bar = slashToRegexp('node_modules\\core-js');
-console.log(bar); // output /node_modules[\\/]core-js/
+slashToRegexp('node_modules\\core-js');
+// output /node_modules[\\/]core-js/
+
+slashToRegexp('/node_modules/decimal.js/');
+// output /[\\/]node_modules[\\/]decimal\.js[\\/]/
 ```

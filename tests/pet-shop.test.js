@@ -1,7 +1,8 @@
 // @ts-nocheck
 const test = require('ava');
-const PetShop = require('../packages/pet-shop');
 const StorageShim = require('node-storage-shim');
+
+const PetShop = require('../packages/pet-shop');
 
 const storage = new StorageShim();
 

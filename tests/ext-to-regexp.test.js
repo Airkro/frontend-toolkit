@@ -1,7 +1,10 @@
 // @ts-nocheck
-// eslint-disable-next-line import/no-extraneous-dependencies
-const ext2regexp = require('ext-to-regexp');
+
+/* eslint-disable ava/no-incorrect-deep-equal */
+
 const test = require('ava');
+
+const ext2regexp = require('../packages/ext-to-regexp');
 
 test('Initialize', t => {
   const html = ext2regexp('html');

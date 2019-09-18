@@ -1,14 +1,27 @@
 // @ts-nocheck
-// eslint-disable-next-line import/no-extraneous-dependencies
-const slash2regexp = require('slash-to-regexp');
+
 const test = require('ava');
+
+const slash2regexp = require('../packages/slash-to-regexp');
 
 test('Initialize example', t => {
   const foo = slash2regexp('node_modules/core-js');
   const bar = slash2regexp('node_modules\\core-js');
-  const baz = slash2regexp('/node_modules/core-js/');
+  const baz = slash2regexp('/node_modules/decimal.js/');
 
+  /* eslint-disable ava/no-incorrect-deep-equal */
   t.deepEqual(foo, /node_modules[\\/]core-js/);
   t.deepEqual(bar, /node_modules[\\/]core-js/);
-  t.deepEqual(baz, /[\\/]node_modules[\\/]core-js[\\/]/);
+  t.deepEqual(baz, /[\\/]node_modules[\\/]decimal\.js[\\/]/);
+  /* eslint-enable ava/no-incorrect-deep-equal */
+});
+
+test('Reverse test', t => {
+  const string = 'node_modules/decimal.js';
+
+  const regexp = slash2regexp(string);
+
+  // eslint-disable-next-line ava/no-incorrect-deep-equal
+  t.deepEqual(regexp, /node_modules[\\/]decimal\.js/);
+  t.regex(string, regexp);
 });
