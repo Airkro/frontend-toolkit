@@ -45,3 +45,10 @@ test('Add Flags', t => {
   t.deepEqual(regexp, /node_modules[\\/]react/g);
   t.regex(string, regexp);
 });
+
+test('Multiple match', t => {
+  const regexp = slash2regexp('node_modules/(react|vue)/');
+
+  // eslint-disable-next-line ava/no-incorrect-deep-equal
+  t.deepEqual(regexp, /node_modules[\\/](react|vue)[\\/]/);
+});

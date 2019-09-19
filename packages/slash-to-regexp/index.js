@@ -1,6 +1,6 @@
 'use strict';
 
-const regex = /[|{}()[\]^$+*?.]/g;
+const regex = /[{}[\]^$+*?.]/g;
 
 module.exports = function slashToRegexp(path, flags) {
   if (typeof path !== 'string') {
