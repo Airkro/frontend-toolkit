@@ -4,7 +4,7 @@ const test = require('ava');
 
 const slash2regexp = require('../packages/slash-to-regexp');
 
-test('Initialize example', t => {
+test('Single example', t => {
   const foo = slash2regexp('node_modules/core-js');
   const bar = slash2regexp('node_modules\\core-js');
   const baz = slash2regexp('/node_modules/decimal.js/');
@@ -16,6 +16,16 @@ test('Initialize example', t => {
   /* eslint-enable ava/no-incorrect-deep-equal */
 });
 
+test('Double example', t => {
+  const foo = slash2regexp('node_modules//core-js');
+  const bar = slash2regexp('node_modules\\\\core-js');
+
+  /* eslint-disable ava/no-incorrect-deep-equal */
+  t.deepEqual(foo, /node_modules[\\/]core-js/);
+  t.deepEqual(bar, /node_modules[\\/]core-js/);
+  /* eslint-enable ava/no-incorrect-deep-equal */
+});
+
 test('Reverse test', t => {
   const string = 'node_modules/decimal.js';
 
@@ -23,5 +33,15 @@ test('Reverse test', t => {
 
   // eslint-disable-next-line ava/no-incorrect-deep-equal
   t.deepEqual(regexp, /node_modules[\\/]decimal\.js/);
+  t.regex(string, regexp);
+});
+
+test('Add Flags', t => {
+  const string = 'node_modules/react';
+
+  const regexp = slash2regexp(string, 'g');
+
+  // eslint-disable-next-line ava/no-incorrect-deep-equal
+  t.deepEqual(regexp, /node_modules[\\/]react/g);
   t.regex(string, regexp);
 });
