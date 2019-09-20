@@ -52,3 +52,10 @@ test('Multiple match', t => {
   // eslint-disable-next-line ava/no-incorrect-deep-equal
   t.deepEqual(regexp, /node_modules[\\/](react|vue)[\\/]/);
 });
+
+test('Special characters', t => {
+  const foo = slash2regexp('^/node_modules/react-(.)*');
+
+  // eslint-disable-next-line ava/no-incorrect-deep-equal
+  t.deepEqual(foo, /^[\\/]node_modules[\\/]react-(.)*/);
+});

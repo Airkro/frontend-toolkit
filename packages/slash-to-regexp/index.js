@@ -1,19 +1,20 @@
 'use strict';
 
-const regex = /[{}[\]^$+*?.]/g;
-
 module.exports = function slashToRegexp(path, flags) {
   if (typeof path !== 'string') {
     throw new TypeError('Expected a string');
   }
 
-  const replacer = ',,,,,,,,,,,,,,,,';
+  const replacer1 = ',,,,,,,,,,,,,,,,';
+  const replacer2 = '~~~~~~~~~~~~~~~~';
 
   return new RegExp(
     path
-      .replace(/\\{1,2}|\/{1,2}/g, replacer)
-      .replace(regex, '\\$&')
-      .replace(new RegExp(replacer, 'g'), '[\\\\/]'),
+      .replace(/\(\.\)/g, replacer1)
+      .replace(/\./g, replacer2)
+      .replace(/(?<![\\/])([\\/]{1,2})(?![\\/])/g, '[\\\\/]')
+      .replace(new RegExp(replacer1, 'g'), '(.)')
+      .replace(new RegExp(replacer2, 'g'), '\\.'),
     flags
   );
 };
