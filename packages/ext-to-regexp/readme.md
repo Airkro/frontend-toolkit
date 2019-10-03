@@ -23,14 +23,24 @@ npm install ext-to-regexp
 ```js
 const extToRegexp = require('ext-to-regexp');
 
-const regex = extToRegexp('js', 'jsx');
+const regex = extToRegexp({
+  extname: ['js', 'jsx']
+});
 console.log(regex); // output /\.(js|jsx)$/
 
-const foo = extToRegexp('css');
+const foo = extToRegexp({
+  extname: ['css']
+});
 const bar = foo.add('sass', 'scss').add('less');
 const baz = bar.remove('sass').remove('scss');
 
 console.log(foo); // output /\.css$/
 console.log(bar); // output /\.(css|less|sass|scss)$/
 console.log(baz); // output /\.(css|less)$/
+
+const image = extToRegexp({
+  suffix: ['min'],
+  extname: ['jpg', 'png']
+});
+console.log(image); // output /\.min\.(jpg|png)$/
 ```
