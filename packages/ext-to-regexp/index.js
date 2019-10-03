@@ -1,32 +1,48 @@
-const {
-  uniqueness, subtract, makeRegexp, typeCheck
-} = require('./lib');
+'use strict';
 
-module.exports = function extToRegexp(...input) {
-  typeCheck(input);
+const { subtract, makeRegexp, arrayTypeCheck } = require('./lib');
 
-  const extname = uniqueness(input);
-  const regexp = makeRegexp('', extname);
+module.exports = function extToRegexp({ suffix = [], extname = [] } = {}) {
+  arrayTypeCheck(suffix, 'suffix');
+  arrayTypeCheck(extname, 'extname', true);
 
-  return Object.freeze(
-    Object.defineProperties(regexp, {
-      extname: {
-        value: Object.freeze(extname)
-      },
-      add: {
-        value(...ext) {
-          return extToRegexp(...extname, ...ext);
-        }
-      },
-      ...(extname.length > 1
-        ? {
-          remove: {
-            value(...ext) {
-              return extToRegexp(...subtract(extname, ext));
-            }
-          }
-        }
-        : undefined)
-    })
-  );
+  extname.sort();
+
+  return Object.defineProperties(makeRegexp(suffix, extname), {
+    suffix: {
+      enumerable: true,
+      value: Object.freeze(suffix)
+    },
+    extname: {
+      enumerable: true,
+      value: Object.freeze(extname)
+    },
+    valueOf: {
+      value() {
+        return new RegExp(this.source, this.flags);
+      }
+    },
+    add: {
+      enumerable: true,
+      value(...ext) {
+        arrayTypeCheck(ext, 'extname', true);
+
+        return extToRegexp({
+          suffix,
+          extname: [...extname, ...ext]
+        });
+      }
+    },
+    remove: {
+      enumerable: true,
+      value(...ext) {
+        arrayTypeCheck(ext, 'extname', true);
+
+        return extToRegexp({
+          suffix,
+          extname: subtract(extname, ext)
+        });
+      }
+    }
+  });
 };

@@ -1,33 +1,41 @@
-function uniqueness(array) {
-  return [...new Set(array)].sort();
-}
+'use strict';
 
 function subtract(set, array) {
   return set.filter(item => !array.includes(item));
 }
 
-function makeRegexp(suffix, extname) {
-  if (typeof suffix !== 'string') {
-    throw new TypeError('Suffix has to be a string');
-  }
+function makeRegexp(suffixes, extname) {
+  const suffix = suffixes.length > 0 ? ['', ...suffixes].join('\\.') : '';
   const mode = extname.length === 1 ? extname[0] : `(${extname.join('|')})`;
   return new RegExp(`${suffix}\\.${mode}$`);
 }
 
-function typeCheck(parameters) {
-  if (parameters.length === 0) {
-    throw new TypeError('Parameter is required');
+function childTypeCheck(parameters) {
+  if (parameters.length > 0) {
+    parameters.forEach(parameter => {
+      if (typeof parameter !== 'string' || parameter === '') {
+        throw new TypeError(
+          `Parameter ${JSON.stringify(parameter)} is not valid`
+        );
+      }
+    });
   }
-  parameters.forEach(ext => {
-    if (typeof ext !== 'string' || ext === '') {
-      throw new TypeError(`Parameter ${JSON.stringify(ext)} is not valid`);
-    }
-  });
+}
+
+function arrayTypeCheck(parameters, name, length = false) {
+  if (!Array.isArray(parameters)) {
+    throw new TypeError(`Parameter \`${name}\` should be an array`);
+  }
+
+  if (length && parameters.length === 0) {
+    throw new TypeError(`Parameter \`${name}\` shouldn't be empty`);
+  }
+
+  childTypeCheck(parameters);
 }
 
 module.exports = {
   makeRegexp,
   subtract,
-  typeCheck,
-  uniqueness
+  arrayTypeCheck
 };
