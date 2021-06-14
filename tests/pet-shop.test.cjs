@@ -1,12 +1,13 @@
+/* eslint-disable unicorn/import-index */
 // @ts-nocheck
 const test = require('ava');
 const StorageShim = require('node-storage-shim');
 
-const PetShop = require('../packages/pet-shop');
+const PetShop = require('../packages/pet-shop/index.js');
 
 const storage = new StorageShim();
 
-test('Base Usage', t => {
+test('Base Usage', (t) => {
   const namespace = 'test-1';
 
   const store = PetShop({ namespace, storage });
@@ -15,13 +16,15 @@ test('Base Usage', t => {
 
   t.throws(
     () => {
+      "use strict";
+
       store.namespace = 'overwrite';
     },
     {
       instanceOf: TypeError,
       message:
-        "Cannot assign to read only property 'namespace' of object '#<Object>'"
-    }
+        "Cannot assign to read only property 'namespace' of object '#<Object>'",
+    },
   );
 
   t.throws(
@@ -30,8 +33,8 @@ test('Base Usage', t => {
     },
     {
       instanceOf: TypeError,
-      message: 'The Value should be a string'
-    }
+      message: 'The Value should be a string',
+    },
   );
 
   t.is(store.get('abc'), undefined);
@@ -61,7 +64,7 @@ test('Base Usage', t => {
   t.deepEqual(store.valueOf(), {});
 });
 
-test('Json support', t => {
+test('Json support', (t) => {
   const namespace = 'test-2';
 
   const store = PetShop({ namespace, storage, json: true });
@@ -75,8 +78,8 @@ test('Json support', t => {
     {
       instanceOf: TypeError,
       message:
-        "Cannot assign to read only property 'namespace' of object '#<Object>'"
-    }
+        "Cannot assign to read only property 'namespace' of object '#<Object>'",
+    },
   );
 
   t.is(store.get('abc'), undefined);
@@ -106,7 +109,7 @@ test('Json support', t => {
   t.deepEqual(store.valueOf(), {});
 });
 
-test('Falsy value', t => {
+test('Falsy value', (t) => {
   const namespace = 'test-3';
 
   const store = PetShop({ namespace, storage, json: true });
@@ -120,8 +123,8 @@ test('Falsy value', t => {
     {
       instanceOf: TypeError,
       message:
-        "Cannot assign to read only property 'namespace' of object '#<Object>'"
-    }
+        "Cannot assign to read only property 'namespace' of object '#<Object>'",
+    },
   );
 
   t.is(store.get('abc'), undefined);
