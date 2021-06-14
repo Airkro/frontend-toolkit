@@ -22,12 +22,15 @@
   "homepage": "https://github.com/airkro/frontend-toolkit/tree/master/packages/slash-to-regexp",
   "repository": {
     "type": "git",
-    "url": "https://github.com/airkro/regexp-toolset",
+    "url": "https://github.com/airkro/frontend-toolkit.git",
     "directory": "packages/slash-to-regexp"
   },
-  "main": "index.js",
+  "bugs": {
+    "url": "https://github.com/airkro/frontend-toolkit/issues"
+  },
+  "main": "index.cjs",
+  "types": "index.d.ts",
   "engines": {
     "node": ">=8.10"
-  },
-  "types": "index.d.ts"
+  }
 }

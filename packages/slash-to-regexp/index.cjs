@@ -12,9 +12,9 @@ module.exports = function slashToRegexp(path, flags) {
     path
       .replace(/\(\.\)/g, replacer1)
       .replace(/\./g, replacer2)
-      .replace(/(?<![\\/])([\\/]{1,2})(?![\\/])/g, '[\\\\/]')
+      .replace(/(?<![/\\])([/\\]{1,2})(?![/\\])/g, '[/\\\\]')
       .replace(new RegExp(replacer1, 'g'), '(.)')
       .replace(new RegExp(replacer2, 'g'), '\\.'),
-    flags
+    flags,
   );
 };

@@ -1,9 +1,10 @@
-/* eslint-disable unicorn/import-index */
+'use strict';
+
 // @ts-nocheck
 const test = require('ava');
 const StorageShim = require('node-storage-shim');
 
-const PetShop = require('../packages/pet-shop/index.js');
+const PetShop = require('pet-shop');
 
 const storage = new StorageShim();
 
@@ -16,8 +17,6 @@ test('Base Usage', (t) => {
 
   t.throws(
     () => {
-      "use strict";
-
       store.namespace = 'overwrite';
     },
     {
