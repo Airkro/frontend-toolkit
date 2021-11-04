@@ -1,6 +1,6 @@
 {
   "name": "pet-shop",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "A simple wrapper of Web Storage API",
   "license": "MIT",
   "author": {
@@ -18,13 +18,15 @@
     "storage",
     "store"
   ],
+  "homepage": "https://github.com/airkro/frontend-toolkit/tree/master/packages/pet-shop",
   "repository": {
     "type": "git",
-    "url": "https://github.com/airkro/frontend-toolkit",
+    "url": "https://github.com/airkro/frontend-toolkit.git",
     "directory": "packages/pet-shop"
   },
+  "bugs": {
+    "url": "https://github.com/airkro/frontend-toolkit/issues"
+  },
   "main": "index.js",
-  "engines": {
-    "node": ">=8.3.0"
-  }
+  "type": "module"
 }

@@ -21,10 +21,12 @@ npm install pet-shop
 Usage
 
 ```js
+import { PetShop } from 'pet-shop';
+
 // plain-text store
 const store = PetShop({
   namespace: 'pet-shop',
-  storage: localStorage
+  storage: sessionStorage
 });
 
 store.set('abc', 'xyz');
@@ -38,6 +40,8 @@ store.has('abc'); // output: false
 ```
 
 ```js
+import { PetShop } from 'pet-shop';
+
 // json store
 const store = PetShop({
   namespace: 'pet-shop',

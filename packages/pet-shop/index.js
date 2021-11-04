@@ -1,4 +1,5 @@
-module.exports = function PetShop({ storage, namespace, json = false }) {
+// @ts-nocheck
+export function PetShop({ storage, namespace, json = false }) {
   return Object.defineProperties(
     {},
     {
@@ -76,6 +77,7 @@ module.exports = function PetShop({ storage, namespace, json = false }) {
       valueOf: {
         enumerable: true,
         value: function valueOf() {
+          // eslint-disable-next-line unicorn/prefer-object-from-entries
           return this.keys.reduce(
             (io, key) => ({ [key]: this.get(key), ...io }),
             {},
@@ -104,4 +106,4 @@ module.exports = function PetShop({ storage, namespace, json = false }) {
       },
     },
   );
-};
+}

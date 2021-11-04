@@ -1,10 +1,7 @@
-'use strict';
-
 // @ts-nocheck
-const test = require('ava');
-const StorageShim = require('node-storage-shim');
-
-const PetShop = require('pet-shop');
+import test from 'ava';
+import StorageShim from 'node-storage-shim';
+import { PetShop } from 'pet-shop';
 
 const storage = new StorageShim();
 
