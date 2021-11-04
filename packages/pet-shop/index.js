@@ -1,4 +1,13 @@
 // @ts-nocheck
+
+function safeParse(string) {
+  try {
+    return JSON.parse(string);
+  } catch {
+    
+  }
+}
+
 export function PetShop({ storage, namespace, json = false }) {
   return Object.defineProperties(
     {},
@@ -14,7 +23,7 @@ export function PetShop({ storage, namespace, json = false }) {
         value: json
           ? function get(key) {
               const raw = storage.getItem(`${namespace}.${key}`);
-              return raw !== null ? JSON.parse(raw) : undefined;
+              return raw !== null ? safeParse(raw) : undefined;
             }
           : function get(key) {
               const raw = storage.getItem(`${namespace}.${key}`);

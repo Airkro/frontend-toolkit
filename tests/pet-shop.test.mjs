@@ -149,3 +149,13 @@ test('Falsy value', (t) => {
   t.deepEqual(store.values, []);
   t.deepEqual(store.valueOf(), {});
 });
+
+test('json error handle', (t) => {
+  const store = PetShop({ namespace: 'kkk', storage, json: true });
+
+  storage.setItem('kkk.abc', '[');
+  storage.setItem('kkk.efg', '[]');
+
+  t.is(store.get('abc'), undefined);
+  t.deepEqual(store.get('efg'), []);
+});
