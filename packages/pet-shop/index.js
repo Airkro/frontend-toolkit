@@ -3,9 +3,8 @@
 function safeParse(string) {
   try {
     return JSON.parse(string);
-  } catch {
-    
-  }
+    // eslint-disable-next-line unicorn/prefer-optional-catch-binding
+  } catch (error) {}
 }
 
 export function PetShop({ storage, namespace, json = false }) {
