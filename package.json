@@ -16,36 +16,34 @@
     "url": "https://github.com/airkro/frontend-toolkit/issues"
   },
   "scripts": {
-    "lint": "nice-move lint",
-    "prepare": "git config core.hooksPath .githooks",
+    "lint:staged": "nice-move lint staged",
+    "prepare": "nice-move git hooks",
+    "snapshot": "ava --fail-fast -u -w",
     "test": "ava --fail-fast"
   },
   "workspaces": [
     "packages/*"
   ],
   "devDependencies": {
-    "@nice-move/cli": "^0.6.0",
-    "@nice-move/commitlint-config": "^0.4.0",
-    "@nice-move/eslint-config-base": "^0.5.69",
-    "@nice-move/prettier-config": "^0.5.1",
-    "ava": "^3.15.0",
-    "commitlint": "^15.0.0",
-    "eslint": "^7.32.0",
-    "eslint-plugin-ava": "^13.1.0",
-    "garou": "^0.2.7",
+    "@bring-it/npm": "^0.2.10",
+    "@nice-move/cli": "^0.10.11",
+    "@nice-move/eslint-config-base": "^0.9.18",
+    "@nice-move/prettier-config": "^0.9.3",
+    "ava": "^5.3.1",
+    "eslint": "^8.47.0",
+    "eslint-plugin-ava": "^14.0.0",
+    "garou": "^0.6.12",
     "node-storage-shim": "^2.0.1",
-    "prettier": "^2.4.1"
+    "prettier": "^3.0.2"
   },
   "engines": {
-    "node": "^12.22.0 || ^14.17.0 || >=16.13.0"
-  },
-  "commitlint": {
-    "extends": "@nice-move/commitlint-config"
+    "node": ">=16.13.0"
   },
   "eslintConfig": {
     "extends": "@nice-move/eslint-config-base"
   },
   "nice-move": {
+    "import-groups": "nice-move-preset",
     "internal-regex": "^(slash-to-regexp|pet-shop)$"
   },
   "prettier": "@nice-move/prettier-config"

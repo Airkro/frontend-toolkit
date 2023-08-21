@@ -10,11 +10,11 @@ module.exports = function slashToRegexp(path, flags) {
 
   return new RegExp(
     path
-      .replace(/\(\.\)/g, replacer1)
-      .replace(/\./g, replacer2)
-      .replace(/(?<![/\\])([/\\]{1,2})(?![/\\])/g, '[/\\\\]')
-      .replace(new RegExp(replacer1, 'g'), '(.)')
-      .replace(new RegExp(replacer2, 'g'), '\\.'),
+      .replaceAll('(.)', replacer1)
+      .replaceAll('.', replacer2)
+      .replaceAll(/(?<![/\\])([/\\]{1,2})(?![/\\])/g, '[/\\\\]')
+      .replaceAll(new RegExp(replacer1, 'g'), '(.)')
+      .replaceAll(new RegExp(replacer2, 'g'), '\\.'),
     flags,
   );
 };

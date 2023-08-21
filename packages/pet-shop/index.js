@@ -22,11 +22,13 @@ export function PetShop({ storage, namespace, json = false }) {
         value: json
           ? function get(key) {
               const raw = storage.getItem(`${namespace}.${key}`);
-              return raw !== null ? safeParse(raw) : undefined;
+
+              return raw === null ? undefined : safeParse(raw);
             }
           : function get(key) {
               const raw = storage.getItem(`${namespace}.${key}`);
-              return raw !== null ? raw : undefined;
+
+              return raw === null ? undefined : raw;
             },
       },
       set: {
@@ -46,6 +48,7 @@ export function PetShop({ storage, namespace, json = false }) {
                 if (typeof value !== 'string') {
                   throw new TypeError('The Value should be a string');
                 }
+
                 storage.setItem(`${namespace}.${key}`, value);
               }
             },
@@ -59,12 +62,15 @@ export function PetShop({ storage, namespace, json = false }) {
       rawKeys: {
         get() {
           const keys = [];
+
           for (let i = 0; i < storage.length; i += 1) {
             const key = storage.key(i);
+
             if (key.startsWith(`${namespace}.`)) {
               keys.push(key);
             }
           }
+
           return keys;
         },
       },
@@ -85,7 +91,6 @@ export function PetShop({ storage, namespace, json = false }) {
       valueOf: {
         enumerable: true,
         value: function valueOf() {
-          // eslint-disable-next-line unicorn/prefer-object-from-entries
           return this.keys.reduce(
             (io, key) => ({ [key]: this.get(key), ...io }),
             {},

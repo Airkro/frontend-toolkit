@@ -20,7 +20,7 @@ npm install slash-to-regexp
 
 ## Usage
 
-```js
+```cjs
 const slashToRegexp = require('slash-to-regexp');
 
 slashToRegexp('node_modules/core-js');

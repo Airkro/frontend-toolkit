@@ -1,27 +1,22 @@
-'use strict';
-
-// @ts-nocheck
-
-const test = require('ava');
-
-const slash2regexp = require('slash-to-regexp');
+import test from 'ava';
+import slash2regexp from 'slash-to-regexp';
 
 test('Single example', (t) => {
   const foo = slash2regexp('node_modules/core-js');
   const bar = slash2regexp('node_modules\\core-js');
   const baz = slash2regexp('/node_modules/decimal.js/');
 
-  t.deepEqual(foo, /node_modules[/\\]core-js/);
-  t.deepEqual(bar, /node_modules[/\\]core-js/);
-  t.deepEqual(baz, /[/\\]node_modules[/\\]decimal\.js[/\\]/);
+  t.snapshot(foo);
+  t.snapshot(bar);
+  t.snapshot(baz);
 });
 
 test('Double example', (t) => {
   const foo = slash2regexp('node_modules//core-js');
   const bar = slash2regexp('node_modules\\\\core-js');
 
-  t.deepEqual(foo, /node_modules[/\\]core-js/);
-  t.deepEqual(bar, /node_modules[/\\]core-js/);
+  t.snapshot(foo);
+  t.snapshot(bar);
 });
 
 test('Reverse test', (t) => {
@@ -29,7 +24,7 @@ test('Reverse test', (t) => {
 
   const regexp = slash2regexp(string);
 
-  t.deepEqual(regexp, /node_modules[/\\]decimal\.js/);
+  t.snapshot(regexp);
   t.regex(string, regexp);
 });
 
@@ -38,18 +33,18 @@ test('Add Flags', (t) => {
 
   const regexp = slash2regexp(string, 'g');
 
-  t.deepEqual(regexp, /node_modules[/\\]react/g);
+  t.snapshot(regexp);
   t.regex(string, regexp);
 });
 
 test('Multiple match', (t) => {
   const regexp = slash2regexp('node_modules/(react|vue)/');
 
-  t.deepEqual(regexp, /node_modules[/\\](react|vue)[/\\]/);
+  t.snapshot(regexp);
 });
 
 test('Special characters', (t) => {
   const foo = slash2regexp('^/node_modules/react-(.)*');
 
-  t.deepEqual(foo, /^[/\\]node_modules[/\\]react-(.)*/);
+  t.snapshot(foo);
 });

@@ -10,7 +10,7 @@ test('Base Usage', (t) => {
 
   const store = PetShop({ namespace, storage });
 
-  t.is(store.namespace, namespace);
+  t.snapshot(store.namespace);
 
   t.throws(
     () => {
@@ -33,7 +33,7 @@ test('Base Usage', (t) => {
     },
   );
 
-  t.is(store.get('abc'), undefined);
+  t.snapshot(store.get('abc'));
 
   store.set('efg', '456');
   store.set('hij', '789');
@@ -42,22 +42,22 @@ test('Base Usage', (t) => {
   const abc = '123';
   store.set('abc', abc);
 
-  t.is(store.get('abc'), abc);
-  t.is(storage.getItem(`${namespace}.abc`), abc);
+  t.snapshot(store.get('abc'));
+  t.snapshot(storage.getItem(`${namespace}.abc`));
 
-  t.is(store.size, 1);
-  t.is(store.has('abc'), true);
-  t.deepEqual(store.keys, ['abc']);
-  t.deepEqual(store.values, [abc]);
-  t.deepEqual(store.valueOf(), { abc });
+  t.snapshot(store.size);
+  t.snapshot(store.has('abc'));
+  t.snapshot(store.keys);
+  t.snapshot(store.values);
+  t.snapshot(store.valueOf());
 
   store.remove('abc');
 
-  t.is(store.size, 0);
-  t.is(store.has('abc'), false);
-  t.deepEqual(store.keys, []);
-  t.deepEqual(store.values, []);
-  t.deepEqual(store.valueOf(), {});
+  t.snapshot(store.size);
+  t.snapshot(store.has('abc'));
+  t.snapshot(store.keys);
+  t.snapshot(store.values);
+  t.snapshot(store.valueOf());
 });
 
 test('Json support', (t) => {
@@ -65,7 +65,7 @@ test('Json support', (t) => {
 
   const store = PetShop({ namespace, storage, json: true });
 
-  t.is(store.namespace, namespace);
+  t.snapshot(store.namespace);
 
   t.throws(
     () => {
@@ -78,7 +78,7 @@ test('Json support', (t) => {
     },
   );
 
-  t.is(store.get('abc'), undefined);
+  t.snapshot(store.get('abc'));
 
   store.set('efg', '456');
   store.set('hij', '789');
@@ -87,22 +87,22 @@ test('Json support', (t) => {
   const abc = [{ xyz: 123 }];
   store.set('abc', abc);
 
-  t.deepEqual(store.get('abc'), abc);
-  t.deepEqual(storage.getItem(`${namespace}.abc`), JSON.stringify(abc));
+  t.snapshot(store.get('abc'));
+  t.snapshot(storage.getItem(`${namespace}.abc`));
 
-  t.is(store.size, 1);
-  t.is(store.has('abc'), true);
-  t.deepEqual(store.keys, ['abc']);
-  t.deepEqual(store.values, [abc]);
-  t.deepEqual(store.valueOf(), { abc });
+  t.snapshot(store.size);
+  t.snapshot(store.has('abc'));
+  t.snapshot(store.keys);
+  t.snapshot(store.values);
+  t.snapshot(store.valueOf());
 
   store.remove('abc');
 
-  t.is(store.size, 0);
-  t.is(store.has('abc'), false);
-  t.deepEqual(store.keys, []);
-  t.deepEqual(store.values, []);
-  t.deepEqual(store.valueOf(), {});
+  t.snapshot(store.size);
+  t.snapshot(store.has('abc'));
+  t.snapshot(store.keys);
+  t.snapshot(store.values);
+  t.snapshot(store.valueOf());
 });
 
 test('Falsy value', (t) => {
@@ -110,7 +110,7 @@ test('Falsy value', (t) => {
 
   const store = PetShop({ namespace, storage, json: true });
 
-  t.is(store.namespace, namespace);
+  t.snapshot(store.namespace);
 
   t.throws(
     () => {
@@ -123,7 +123,7 @@ test('Falsy value', (t) => {
     },
   );
 
-  t.is(store.get('abc'), undefined);
+  t.snapshot(store.get('abc'));
 
   store.set('efg', '456');
   store.set('hij', '789');
@@ -132,22 +132,22 @@ test('Falsy value', (t) => {
   const abc = false;
   store.set('abc', abc);
 
-  t.deepEqual(store.get('abc'), abc);
-  t.deepEqual(storage.getItem(`${namespace}.abc`), JSON.stringify(abc));
+  t.snapshot(store.get('abc'));
+  t.snapshot(storage.getItem(`${namespace}.abc`));
 
-  t.is(store.size, 1);
-  t.is(store.has('abc'), true);
-  t.deepEqual(store.keys, ['abc']);
-  t.deepEqual(store.values, [abc]);
-  t.deepEqual(store.valueOf(), { abc });
+  t.snapshot(store.size);
+  t.snapshot(store.has('abc'));
+  t.snapshot(store.keys);
+  t.snapshot(store.values);
+  t.snapshot(store.valueOf());
 
   store.remove('abc');
 
-  t.is(store.size, 0);
-  t.is(store.has('abc'), false);
-  t.deepEqual(store.keys, []);
-  t.deepEqual(store.values, []);
-  t.deepEqual(store.valueOf(), {});
+  t.snapshot(store.size);
+  t.snapshot(store.has('abc'));
+  t.snapshot(store.keys);
+  t.snapshot(store.values);
+  t.snapshot(store.valueOf());
 });
 
 test('json error handle', (t) => {
@@ -156,6 +156,6 @@ test('json error handle', (t) => {
   storage.setItem('kkk.abc', '[');
   storage.setItem('kkk.efg', '[]');
 
-  t.is(store.get('abc'), undefined);
-  t.deepEqual(store.get('efg'), []);
+  t.snapshot(store.get('abc'));
+  t.snapshot(store.get('efg'));
 });
