@@ -1,6 +1,7 @@
 // @ts-nocheck
 import test from 'ava';
 import StorageShim from 'node-storage-shim';
+
 import { PetShop } from 'pet-shop';
 
 const storage = new StorageShim();
@@ -20,16 +21,6 @@ test('Base Usage', (t) => {
       instanceOf: TypeError,
       message:
         "Cannot assign to read only property 'namespace' of object '#<Object>'",
-    },
-  );
-
-  t.throws(
-    () => {
-      store.set('xyz', 123);
-    },
-    {
-      instanceOf: TypeError,
-      message: 'The Value should be a string',
     },
   );
 

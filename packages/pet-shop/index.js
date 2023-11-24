@@ -45,10 +45,6 @@ export function PetShop({ storage, namespace, json = false }) {
               if (value === undefined || value === null) {
                 this.remove(key);
               } else {
-                if (typeof value !== 'string') {
-                  throw new TypeError('The Value should be a string');
-                }
-
                 storage.setItem(`${namespace}.${key}`, value);
               }
             },
@@ -119,4 +115,19 @@ export function PetShop({ storage, namespace, json = false }) {
       },
     },
   );
+}
+
+export function smart(store, key) {
+  return {
+    get() {
+      return store.get(key);
+    },
+    set(value) {
+      if (value !== null && value !== undefined) {
+        store.set(key, value);
+      } else {
+        store.remove(key);
+      }
+    },
+  };
 }

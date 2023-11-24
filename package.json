@@ -25,16 +25,16 @@
     "packages/*"
   ],
   "devDependencies": {
-    "@bring-it/npm": "^0.2.10",
-    "@nice-move/cli": "^0.10.11",
-    "@nice-move/eslint-config-base": "^0.9.18",
-    "@nice-move/prettier-config": "^0.9.3",
+    "@bring-it/npm": "^0.3.9",
+    "@nice-move/cli": "^0.10.14",
+    "@nice-move/eslint-config-base": "^0.9.24",
+    "@nice-move/prettier-config": "^0.9.8",
     "ava": "^5.3.1",
-    "eslint": "^8.47.0",
+    "eslint": "^8.54.0",
     "eslint-plugin-ava": "^14.0.0",
-    "garou": "^0.6.12",
+    "garou": "^0.6.19",
     "node-storage-shim": "^2.0.1",
-    "prettier": "^3.0.2"
+    "prettier": "^3.1.0"
   },
   "engines": {
     "node": ">=16.13.0"

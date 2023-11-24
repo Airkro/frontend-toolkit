@@ -1,6 +1,6 @@
 {
   "name": "pet-shop",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "A simple wrapper of Web Storage API",
   "license": "MIT",
   "author": {
@@ -28,5 +28,9 @@
     "url": "https://github.com/airkro/frontend-toolkit/issues"
   },
   "main": "index.js",
-  "type": "module"
+  "type": "module",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
 }

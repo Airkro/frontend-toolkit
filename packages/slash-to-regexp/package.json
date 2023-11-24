@@ -28,9 +28,13 @@
   "bugs": {
     "url": "https://github.com/airkro/frontend-toolkit/issues"
   },
-  "main": "index.cjs",
   "types": "index.d.ts",
+  "main": "index.cjs",
   "engines": {
     "node": ">=8.10"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }
