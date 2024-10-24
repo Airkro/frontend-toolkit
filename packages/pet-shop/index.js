@@ -117,17 +117,54 @@ export function PetShop({ storage, namespace, json = false }) {
   );
 }
 
-export function smart(store, key) {
-  return {
-    get() {
-      return store.get(key);
-    },
-    set(value) {
-      if (value !== null && value !== undefined) {
-        store.set(key, value);
-      } else {
+export function createProxy(store) {
+  return new Proxy(
+    {},
+    {
+      get(_, key) {
+        return store.get(key);
+      },
+      async set(_, key, value) {
+        if (value !== null && value !== undefined) {
+          store.set(key, value);
+        } else {
+          store.remove(key);
+        }
+
+        return true;
+      },
+      async deleteProperty(_, key) {
         store.remove(key);
-      }
+
+        return true;
+      },
     },
-  };
+  );
+}
+
+export function createCache(storage, keys) {
+  return Object.defineProperties(
+    {
+      clear() {
+        storage.clear();
+      },
+    },
+    Object.fromEntries(
+      keys.map((key) => [
+        key,
+        {
+          get() {
+            return storage.get(key);
+          },
+          set(value) {
+            if (value || value === 0 || value === false) {
+              storage.set(key, value);
+            } else {
+              storage.remove(key);
+            }
+          },
+        },
+      ]),
+    ),
+  );
 }

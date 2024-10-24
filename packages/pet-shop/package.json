@@ -1,12 +1,8 @@
 {
   "name": "pet-shop",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "A simple wrapper of Web Storage API",
   "license": "MIT",
-  "author": {
-    "name": "Eric Chen",
-    "email": "airkro@qq.com"
-  },
   "keywords": [
     "cache",
     "config",
