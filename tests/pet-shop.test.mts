@@ -1,9 +1,7 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
 import test from 'ava';
 import StorageShim from 'node-storage-shim';
 
-import { PetShop } from 'pet-shop';
+import { PetShop } from 'pet-shop/src/index.ts';
 
 const storage = new StorageShim();
 

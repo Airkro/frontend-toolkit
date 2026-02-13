@@ -1,8 +1,11 @@
 {
   "name": "pet-shop",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "A simple wrapper of Web Storage API",
   "license": "MIT",
+  "author": {
+    "name": "Eric Chen"
+  },
   "keywords": [
     "cache",
     "config",
@@ -14,17 +17,24 @@
     "storage",
     "store"
   ],
-  "homepage": "https://github.com/airkro/frontend-toolkit/tree/master/packages/pet-shop",
+  "homepage": "https://github.com/Airkro/frontend-toolkit/tree/master/packages/pet-shop",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/airkro/frontend-toolkit.git",
+    "url": "git+https://github.com/Airkro/frontend-toolkit.git",
     "directory": "packages/pet-shop"
   },
   "bugs": {
-    "url": "https://github.com/airkro/frontend-toolkit/issues"
+    "url": "https://github.com/Airkro/frontend-toolkit/issues"
   },
-  "main": "index.js",
+  "types": "dist/index.d.ts",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
   "type": "module",
+  "scripts": {
+    "prepublishOnly": "tsc -p tsconfig.build.json"
+  },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
