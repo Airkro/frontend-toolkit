@@ -6,13 +6,16 @@
   "homepage": "https://github.com/airkro/frontend-toolkit",
   "repository": {
     "type": "git",
-    "url": "https://github.com/airkro/frontend-toolkit.git"
+    "url": "git+https://github.com/airkro/frontend-toolkit.git"
   },
   "bugs": {
     "url": "https://github.com/airkro/frontend-toolkit/issues"
   },
+  "type": "module",
   "scripts": {
+    "lint:eslint": "eslint . --quiet --fix --concurrency=auto",
     "lint:staged": "nice-move lint staged",
+    "lint:type": "tsc -p tsconfig.json",
     "lint:version": "syncpack lint",
     "prepare": "nice-move git hooks",
     "snapshot": "ava --fail-fast -u",
@@ -20,23 +23,32 @@
     "version:pin": "syncpack fix-mismatches"
   },
   "devDependencies": {
-    "@bring-it/npm": "^0.5.9",
-    "@nice-move/all-in-base": "^0.2.11",
-    "@nice-move/syncpack-config": "^0.2.9",
-    "ava": "^6.2.0",
-    "eslint": "^8.57.1",
-    "eslint-plugin-ava": "^14.0.0",
-    "garou": "^0.8.2",
+    "@bring-it/cli": "^0.11.1",
+    "@bring-it/npm": "^0.9.3",
+    "@nice-move/all-in-base": "^0.6.39",
+    "@nice-move/syncpack-config": "^0.4.2",
+    "ava": "^6.4.1",
+    "eslint": "^9.39.2",
+    "garou": "^0.9.17",
     "node-storage-shim": "^2.0.1",
-    "prettier": "^3.3.3",
-    "syncpack": "^13.0.0"
+    "prettier": "~3.8.1",
+    "syncpack": "^13.0.4",
+    "typescript": "~5.9.3"
   },
-  "packageManager": "pnpm@9.12.2",
+  "peerDependencies": {
+    "pet-shop": "workspace:^",
+    "slash-to-regexp": "workspace:^"
+  },
+  "packageManager": "pnpm@10.29.3",
   "engines": {
-    "node": ">=16.13.0"
+    "node": ">=16.13.0",
+    "pnpm": "^10.29.3"
   },
-  "eslintConfig": {
-    "extends": "@nice-move/eslint-config-base"
+  "ava": {
+    "extensions": [
+      "mts",
+      "mjs"
+    ]
   },
-  "prettier": "@nice-move/prettier-config"
+  "prettier": "@nice-move/all-in-base/prettier"
 }

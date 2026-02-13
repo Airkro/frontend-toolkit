@@ -22,7 +22,7 @@
   "homepage": "https://github.com/airkro/frontend-toolkit/tree/master/packages/slash-to-regexp",
   "repository": {
     "type": "git",
-    "url": "https://github.com/airkro/frontend-toolkit.git",
+    "url": "git+https://github.com/airkro/frontend-toolkit.git",
     "directory": "packages/slash-to-regexp"
   },
   "bugs": {

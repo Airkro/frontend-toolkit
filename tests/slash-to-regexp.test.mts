@@ -3,7 +3,7 @@ import slash2regexp from 'slash-to-regexp';
 
 test('Single example', (t) => {
   const foo = slash2regexp('node_modules/core-js');
-  const bar = slash2regexp('node_modules\\core-js');
+  const bar = slash2regexp(String.raw`node_modules\core-js`);
   const baz = slash2regexp('/node_modules/decimal.js/');
 
   t.snapshot(foo);
@@ -13,7 +13,7 @@ test('Single example', (t) => {
 
 test('Double example', (t) => {
   const foo = slash2regexp('node_modules//core-js');
-  const bar = slash2regexp('node_modules\\\\core-js');
+  const bar = slash2regexp(String.raw`node_modules\\core-js`);
 
   t.snapshot(foo);
   t.snapshot(bar);

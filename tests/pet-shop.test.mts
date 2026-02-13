@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import test from 'ava';
 import StorageShim from 'node-storage-shim';

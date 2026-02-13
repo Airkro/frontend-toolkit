@@ -26,7 +26,7 @@ const slashToRegexp = require('slash-to-regexp');
 slashToRegexp('node_modules/core-js');
 // output /node_modules[\\/]core-js/
 
-slashToRegexp('node_modules\\\\core-js', 'g');
+slashToRegexp(String.raw`node_modules\\core-js`, 'g');
 // output /node_modules[\\/]core-js/g
 
 slashToRegexp('/node_modules/decimal.js/');
