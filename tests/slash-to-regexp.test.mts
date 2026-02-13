@@ -1,5 +1,5 @@
 import test from 'ava';
-import slash2regexp from 'slash-to-regexp';
+import { slash2regexp } from 'slash-to-regexp/src/index.mts';
 
 test('Single example', (t) => {
   const foo = slash2regexp('node_modules/core-js');

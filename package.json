@@ -41,7 +41,7 @@
   },
   "packageManager": "pnpm@10.29.3",
   "engines": {
-    "node": ">=16.13.0",
+    "node": ">=20.18.0",
     "pnpm": "^10.29.3"
   },
   "ava": {

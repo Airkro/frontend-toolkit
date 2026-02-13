@@ -1,6 +1,5 @@
-'use strict';
-
-module.exports = function slashToRegexp(path, flags) {
+/** Convert path with slash into regexp */
+export function slashToRegexp(path: string, flags?: string) {
   if (typeof path !== 'string') {
     throw new TypeError('Expected a string');
   }
@@ -12,9 +11,11 @@ module.exports = function slashToRegexp(path, flags) {
     path
       .replaceAll('(.)', replacer1)
       .replaceAll('.', replacer2)
-      .replaceAll(/(?<![/\\])([/\\]{1,2})(?![/\\])/g, String.raw`[/\\]`)
+      .replaceAll(/(?<![/\\])[/\\]{1,2}(?![/\\])/g, String.raw`[/\\]`)
       .replaceAll(new RegExp(replacer1, 'g'), '(.)')
       .replaceAll(new RegExp(replacer2, 'g'), String.raw`\.`),
     flags,
   );
-};
+}
+
+export { slashToRegexp as slash2regexp };

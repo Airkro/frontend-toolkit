@@ -1,11 +1,10 @@
 {
   "name": "slash-to-regexp",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Convert path with slash into regexp",
   "license": "MIT",
   "author": {
-    "name": "Eric Chen",
-    "email": "airkro@qq.com"
+    "name": "Eric Chen"
   },
   "keywords": [
     "backslash",
@@ -19,19 +18,26 @@
     "slash",
     "webpack"
   ],
-  "homepage": "https://github.com/airkro/frontend-toolkit/tree/master/packages/slash-to-regexp",
+  "homepage": "https://github.com/Airkro/frontend-toolkit/tree/master/packages/slash-to-regexp",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/airkro/frontend-toolkit.git",
+    "url": "git+https://github.com/Airkro/frontend-toolkit.git",
     "directory": "packages/slash-to-regexp"
   },
   "bugs": {
-    "url": "https://github.com/airkro/frontend-toolkit/issues"
+    "url": "https://github.com/Airkro/frontend-toolkit/issues"
   },
-  "types": "index.d.ts",
-  "main": "index.cjs",
+  "types": "dist/index.d.ts",
+  "main": "dist/index.mjs",
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "scripts": {
+    "prepublishOnly": "tsc -p tsconfig.build.json"
+  },
   "engines": {
-    "node": ">=16.13.0"
+    "node": ">=20.18.0"
   },
   "publishConfig": {
     "access": "public",
