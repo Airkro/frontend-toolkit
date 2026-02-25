@@ -1,6 +1,6 @@
 {
   "name": "pet-shop",
-  "version": "0.3.0",
+  "version": "0.3.2",
   "description": "A simple wrapper of Web Storage API",
   "license": "MIT",
   "author": {

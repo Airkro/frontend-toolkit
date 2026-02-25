@@ -4,17 +4,17 @@ interface PetShopOptions {
   json?: boolean;
 }
 
-interface PetShopInstance<T extends Record<string, any> = Record<string, any>> {
+interface PetShopInstance<T extends Record<string, any> = object> {
   namespace: string;
   get<K extends keyof T>(key: K): T[K] | undefined;
   set<K extends keyof T>(key: K, value: T[K]): void;
-  remove(key: string): void;
+  remove(key: keyof T): void;
   readonly rawKeys: string[];
   readonly keys: (keyof T)[];
   readonly values: T[keyof T][];
   valueOf(): T;
   readonly size: number;
-  has(key: string): boolean;
+  has(key: keyof T): boolean;
   clear(): void;
 }
 
@@ -26,7 +26,7 @@ function safeParse<T = any>(string: string): T | undefined {
   }
 }
 
-export function PetShop<T extends Record<string, any> = Record<string, any>>({
+export function PetShop<T extends Record<string, any> = object>({
   storage,
   namespace,
   json = false,
@@ -91,8 +91,8 @@ export function PetShop<T extends Record<string, any> = Record<string, any>>({
       },
       remove: {
         enumerable: true,
-        value: function remove(key: string): void {
-          storage.removeItem(`${namespace}.${key}`);
+        value: function remove(key: keyof T): void {
+          storage.removeItem(`${namespace}.${String(key)}`);
         },
       },
       rawKeys: {
@@ -114,7 +114,7 @@ export function PetShop<T extends Record<string, any> = Record<string, any>>({
         enumerable: true,
         get(this: PetShopInstance<T>): (keyof T)[] {
           return this.rawKeys.map(
-            (key: string) =>
+            (key: string): keyof T =>
               key.replace(new RegExp(`^${namespace}.`), '') as keyof T,
           );
         },
@@ -122,20 +122,33 @@ export function PetShop<T extends Record<string, any> = Record<string, any>>({
       values: {
         enumerable: true,
         get(this: PetShopInstance<T>): T[keyof T][] {
-          return this.keys.map((key) => this.get(key) as T[keyof T]);
+          const result: T[keyof T][] = [];
+
+          for (const key of this.keys) {
+            const value = this.get(key);
+
+            if (value !== undefined) {
+              result.push(value);
+            }
+          }
+
+          return result;
         },
       },
       valueOf: {
         enumerable: true,
         value: function valueOf(this: PetShopInstance<T>): T {
-          return this.keys.reduce(
-            (io: T, key: keyof T) =>
-              ({
-                [key]: this.get(key),
-                ...io,
-              }) as T,
-            {} as T,
-          );
+          const result = {} as T;
+
+          for (const key of this.keys) {
+            const value = this.get(key);
+
+            if (value !== undefined) {
+              result[key] = value;
+            }
+          }
+
+          return result;
         },
       },
       size: {
@@ -164,67 +177,69 @@ export function PetShop<T extends Record<string, any> = Record<string, any>>({
   return store as PetShopInstance<T>;
 }
 
-export function createProxy<
-  T extends Record<string, any> = Record<string, any>,
->(store: PetShopInstance<T>): T {
-  return new Proxy(
-    {},
-    {
-      get(_, key: string) {
-        return store.get(key as keyof T);
-      },
-      set(_, key: string, value: any) {
-        if (value !== null && value !== undefined) {
-          store.set(key as keyof T, value);
-        } else {
-          store.remove(key);
-        }
+export function createProxy<T extends Record<string, any> = object>(
+  storage: PetShopInstance<T>,
+): T {
+  return new Proxy({} as T, {
+    get(_target, key) {
+      if (typeof key !== 'string') {
+        return;
+      }
 
-        return true;
-      },
-      deleteProperty(_, key: string) {
-        store.remove(key);
-
-        return true;
-      },
+      return storage.get(key);
     },
-  ) as T;
+    set(_target, key, value) {
+      if (typeof key === 'string') {
+        if (value !== null && value !== undefined) {
+          storage.set(key, value);
+        } else {
+          storage.remove(key);
+        }
+      }
+
+      return true;
+    },
+    deleteProperty(_target, key) {
+      if (typeof key === 'string') {
+        storage.remove(key);
+      }
+
+      return true;
+    },
+  });
 }
 
-type CacheInstance<K extends string, V = any> = {
+type CacheInstance<T extends Record<string, any>> = {
   clear(): void;
-} & {
-  [T in K]: V;
-};
+} & T;
 
-export function createCache<K extends string, V = any>(
-  storage: PetShopInstance<any>,
-  keys: readonly K[],
-): CacheInstance<K, V> {
-  const cache = Object.defineProperties(
+export function createCache<T extends Record<string, any> = object>(
+  storage: PetShopInstance<T>,
+): CacheInstance<T> {
+  return Object.defineProperties(
     {
       clear() {
         storage.clear();
       },
-    },
+    } as CacheInstance<T>,
     Object.fromEntries(
-      keys.map((key) => [
-        key,
-        {
-          get() {
-            return storage.get(key as any);
+      storage.keys.map((key) => {
+        return [
+          key,
+          {
+            get() {
+              return storage.get(key);
+            },
+            set(value: T[keyof T]) {
+              if (value || value === 0 || value === false) {
+                storage.set(key, value);
+              } else {
+                storage.remove(key);
+              }
+            },
           },
-          set(value: V) {
-            if (value || value === 0 || value === false) {
-              storage.set(key as any, value);
-            } else {
-              storage.remove(key);
-            }
-          },
-        },
-      ]),
+        ];
+      }),
     ),
   );
-
-  return cache as CacheInstance<K, V>;
 }

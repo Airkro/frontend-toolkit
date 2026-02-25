@@ -1,14 +1,18 @@
 import test from 'ava';
 import StorageShim from 'node-storage-shim';
 
-import { PetShop } from 'pet-shop/src/index.ts';
+import { PetShop, createCache, createProxy } from 'pet-shop/src/index.ts';
 
 const storage = new StorageShim();
 
 test('Base Usage', (t) => {
   const namespace = 'test-1';
 
-  const store = PetShop({ namespace, storage });
+  const store = PetShop<{
+    abc: string;
+    efg: string;
+    hij: string;
+  }>({ namespace, storage });
 
   t.snapshot(store.namespace);
 
@@ -53,7 +57,11 @@ test('Base Usage', (t) => {
 test('Json support', (t) => {
   const namespace = 'test-2';
 
-  const store = PetShop({ namespace, storage, json: true });
+  const store = PetShop<{
+    abc: string;
+    efg: string;
+    hij: string;
+  }>({ namespace, storage, json: true });
 
   t.snapshot(store.namespace);
 
@@ -74,7 +82,7 @@ test('Json support', (t) => {
   store.set('hij', '789');
   store.clear();
 
-  const abc = [{ xyz: 123 }];
+  const abc = 'eeee';
   store.set('abc', abc);
 
   t.snapshot(store.get('abc'));
@@ -98,7 +106,11 @@ test('Json support', (t) => {
 test('Falsy value', (t) => {
   const namespace = 'test-3';
 
-  const store = PetShop({ namespace, storage, json: true });
+  const store = PetShop<{
+    abc: string | boolean;
+    efg: string;
+    hij: string;
+  }>({ namespace, storage, json: true });
 
   t.snapshot(store.namespace);
 
@@ -141,11 +153,59 @@ test('Falsy value', (t) => {
 });
 
 test('json error handle', (t) => {
-  const store = PetShop({ namespace: 'kkk', storage, json: true });
+  const store = PetShop<{
+    abc: string;
+    efg: string;
+    hij: string;
+  }>({ namespace: 'kkk', storage, json: true });
 
   storage.setItem('kkk.abc', '[');
   storage.setItem('kkk.efg', '[]');
 
   t.snapshot(store.get('abc'));
   t.snapshot(store.get('efg'));
+});
+
+test('cache', (t) => {
+  const store = PetShop<{
+    abc?: number;
+    efg: string;
+    hij: boolean;
+  }>({ namespace: 'kkk', storage, json: true });
+
+  const io = createCache(store);
+
+  io.abc = 123;
+  io.efg = '456';
+  io.hij = true;
+
+  t.snapshot(io.abc);
+  t.snapshot(io.efg);
+  t.snapshot(io.hij);
+
+  io.abc = undefined;
+
+  t.snapshot(io.abc);
+});
+
+test('proxy', (t) => {
+  const store = PetShop<{
+    abc?: number;
+    efg: string;
+    hij: boolean;
+  }>({ namespace: 'kkk', storage, json: true });
+
+  const io = createProxy(store);
+
+  io.abc = 123;
+  io.efg = '456';
+  io.hij = true;
+
+  t.snapshot(io.abc);
+  t.snapshot(io.efg);
+  t.snapshot(io.hij);
+
+  delete io.abc;
+
+  t.snapshot(io.abc);
 });
