@@ -3,9 +3,9 @@ import StorageShim from 'node-storage-shim';
 
 import { PetShop, createCache, createProxy } from 'pet-shop/src/index.ts';
 
-const storage = new StorageShim();
-
 test('Base Usage', (t) => {
+  const storage = new StorageShim();
+
   const namespace = 'test-1';
 
   const store = PetShop<{
@@ -55,6 +55,8 @@ test('Base Usage', (t) => {
 });
 
 test('Json support', (t) => {
+  const storage = new StorageShim();
+
   const namespace = 'test-2';
 
   const store = PetShop<{
@@ -104,6 +106,8 @@ test('Json support', (t) => {
 });
 
 test('Falsy value', (t) => {
+  const storage = new StorageShim();
+
   const namespace = 'test-3';
 
   const store = PetShop<{
@@ -153,47 +157,53 @@ test('Falsy value', (t) => {
 });
 
 test('json error handle', (t) => {
+  const storage = new StorageShim();
+
   const store = PetShop<{
     abc: string;
     efg: string;
     hij: string;
-  }>({ namespace: 'kkk', storage, json: true });
+  }>({ namespace: 'error', storage, json: true });
 
-  storage.setItem('kkk.abc', '[');
-  storage.setItem('kkk.efg', '[]');
+  storage.setItem('error.abc', '[');
+  storage.setItem('error.efg', '[]');
 
   t.snapshot(store.get('abc'));
   t.snapshot(store.get('efg'));
 });
 
 test('cache', (t) => {
+  const storage = new StorageShim();
+
   const store = PetShop<{
     abc?: number;
     efg: string;
     hij: boolean;
-  }>({ namespace: 'kkk', storage, json: true });
+  }>({ namespace: 'cache', storage, json: true });
 
-  const io = createCache(store);
+  const io = createCache(store, ['abc', 'efg']);
 
   io.abc = 123;
   io.efg = '456';
-  io.hij = true;
 
-  t.snapshot(io.abc);
-  t.snapshot(io.efg);
-  t.snapshot(io.hij);
+  t.snapshot({ ...io }, 'store');
+  t.snapshot({ ...storage }, 'storage');
 
   io.abc = undefined;
 
-  t.snapshot(io.abc);
+  t.snapshot({ ...io }, 'store');
+
+  t.snapshot({ ...storage }, 'storage');
 });
 
 test('proxy', (t) => {
+  const storage = new StorageShim();
+
   const store = PetShop<{
     abc?: number;
     efg: string;
     hij: boolean;
-  }>({ namespace: 'kkk', storage, json: true });
+  }>({ namespace: 'proxy', storage, json: true });
 
   const io = createProxy(store);
 
@@ -205,7 +215,12 @@ test('proxy', (t) => {
   t.snapshot(io.efg);
   t.snapshot(io.hij);
 
+  t.snapshot({ ...io }, 'store');
+  t.snapshot({ ...storage }, 'storage');
+
   delete io.abc;
 
   t.snapshot(io.abc);
+  t.snapshot({ ...io }, 'store');
+  t.snapshot({ ...storage }, 'storage');
 });

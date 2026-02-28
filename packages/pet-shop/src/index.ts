@@ -181,57 +181,55 @@ export function createProxy<T extends Record<string, any> = object>(
   storage: PetShopInstance<T>,
 ): T {
   return new Proxy({} as T, {
-    get(_target, key) {
-      if (typeof key !== 'string') {
-        return;
-      }
-
+    get(_target, key: string) {
       return storage.get(key);
     },
-    set(_target, key, value) {
-      if (typeof key === 'string') {
-        if (value !== null && value !== undefined) {
-          storage.set(key, value);
-        } else {
-          storage.remove(key);
-        }
+    set(_target, key: string, value) {
+      if (value !== null && value !== undefined) {
+        storage.set(key, value);
+      } else {
+        storage.remove(key);
       }
 
       return true;
     },
-    deleteProperty(_target, key) {
-      if (typeof key === 'string') {
-        storage.remove(key);
-      }
+    deleteProperty(_target, key: string) {
+      storage.remove(key);
 
       return true;
     },
   });
 }
 
-type CacheInstance<T extends Record<string, any>> = {
+type CacheInstance<
+  T extends Record<string, any>,
+  Keys extends (keyof T)[],
+> = Record<Keys[number], T[Keys[number]]> & {
   clear(): void;
-} & T;
+};
 
-export function createCache<T extends Record<string, any> = object>(
-  storage: PetShopInstance<T>,
-): CacheInstance<T> {
+export function createCache<
+  T extends Record<string, any> = object,
+  Keys extends (keyof T)[] = (keyof T)[],
+>(storage: PetShopInstance<T>, keys: Keys): CacheInstance<T, Keys> {
   return Object.defineProperties(
     {
       clear() {
         storage.clear();
       },
-    } as CacheInstance<T>,
+    } as CacheInstance<T, Keys>,
     Object.fromEntries(
-      storage.keys.map((key) => {
+      keys.map((key) => {
         return [
           key,
           {
+            enumerable: false,
+            configurable: true,
             get() {
               return storage.get(key);
             },
             set(value: T[keyof T]) {
-              if (value || value === 0 || value === false) {
+              if (value !== undefined && value !== null) {
                 storage.set(key, value);
               } else {
                 storage.remove(key);
