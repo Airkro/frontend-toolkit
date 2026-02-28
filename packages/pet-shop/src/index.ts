@@ -204,7 +204,7 @@ export function createProxy<T extends Record<string, any> = object>(
 type CacheInstance<
   T extends Record<string, any>,
   Keys extends (keyof T)[],
-> = Record<Keys[number], T[Keys[number]]> & {
+> = Pick<T, Keys[number]> & {
   clear(): void;
 };
 
