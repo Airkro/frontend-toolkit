@@ -1,5 +1,14 @@
+interface StorageLike {
+  getItem(key: string): string | null;
+  setItem(key: string, value: string): void;
+  removeItem(key: string): void;
+  key(index: number): string | null;
+  readonly length: number;
+  clear(): void;
+}
+
 interface PetShopOptions {
-  storage: Storage;
+  storage: StorageLike;
   namespace: string;
   json?: boolean;
 }
@@ -208,11 +217,55 @@ type CacheInstance<
   clear(): void;
 };
 
+export interface CacheOptions<T extends Record<string, any>> {
+  expiresAtKey?: keyof T;
+}
+
 export function createCache<
   T extends Record<string, any> = object,
   Keys extends (keyof T)[] = (keyof T)[],
->(storage: PetShopInstance<T>, keys: Keys): CacheInstance<T, Keys> {
-  return Object.defineProperties(
+>(
+  storage: PetShopInstance<T>,
+  keys: Keys,
+  options?: CacheOptions<T>,
+): CacheInstance<T, Keys> {
+  const expiresAtKey = options?.expiresAtKey;
+
+  function isExpired(): boolean {
+    if (expiresAtKey === undefined) {
+      return false;
+    }
+
+    const expiresAt = storage.get(expiresAtKey as any);
+
+    if (expiresAt === undefined || expiresAt === null) {
+      return false;
+    }
+
+    let timestamp: number | undefined;
+
+    if (typeof expiresAt === 'number') {
+      timestamp = expiresAt;
+    } else if (typeof expiresAt === 'string') {
+      const parsed = Number(expiresAt);
+      if (!Number.isNaN(parsed)) {
+        timestamp = parsed;
+      }
+    }
+
+    if (timestamp === undefined) {
+      return false;
+    }
+
+    if (Date.now() >= timestamp) {
+      storage.clear();
+      return true;
+    }
+
+    return false;
+  }
+
+  const cache = Object.defineProperties(
     {
       clear() {
         storage.clear();
@@ -226,7 +279,7 @@ export function createCache<
             enumerable: false,
             configurable: true,
             get() {
-              return storage.get(key);
+              return isExpired() ? undefined : storage.get(key);
             },
             set(value: T[keyof T]) {
               if (value !== undefined && value !== null) {
@@ -240,4 +293,6 @@ export function createCache<
       }),
     ),
   );
+
+  return cache;
 }

@@ -196,6 +196,32 @@ test('cache', (t) => {
   t.snapshot({ ...storage }, 'storage');
 });
 
+test('cache expires read clears storage', (t) => {
+  const storage = new StorageShim();
+
+  const store = PetShop<{
+    abc?: number;
+    efg: string;
+    expires_at?: number | string;
+  }>({ namespace: 'cache-expire', storage, json: true });
+
+  const io = createCache(store, ['abc', 'efg'], {
+    expiresAtKey: 'expires_at',
+  });
+
+  io.abc = 123;
+  io.efg = '456';
+  storage.setItem('cache-expire.expires_at', JSON.stringify(Date.now() - 1));
+
+  // @ts-expect-error ---------------
+  t.is(io.abc, undefined);
+  // @ts-expect-error ---------------
+  t.is(io.efg, undefined);
+  t.is(storage.getItem('cache-expire.abc'), null);
+  t.is(storage.getItem('cache-expire.efg'), null);
+  t.is(storage.getItem('cache-expire.expires_at'), null);
+});
+
 test('proxy', (t) => {
   const storage = new StorageShim();
 

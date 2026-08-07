@@ -1,4 +1,13 @@
-export function createMiniStorage(api: any): Storage {
+interface StorageLike {
+  getItem(key: string): string | null;
+  setItem(key: string, value: string): void;
+  removeItem(key: string): void;
+  key(index: number): string | null;
+  readonly length: number;
+  clear(): void;
+}
+
+export function createMiniStorage(api: any): StorageLike {
   return Object.freeze({
     getItem: (key: string) => api.getStorageSync(key),
     setItem(key: string, value: any) {
