@@ -2,9 +2,6 @@ packages:
   - packages/*
 
 configDependencies:
-  pnpm-plugin-nice-move: 0.3.6+sha512-r29ZIK+qcmhe98Jv8hchUBCGnM37P73iDLlHGEZGzM00e9SGYYMaJ6qLeeUer1zakblBzIAbsn2F2IiF8UoZWQ==
+  pnpm-plugin-nice-move: ^0.3.9
 
 shamefullyHoist: true
-
-trustPolicyExclude:
-  - semver@6.3.1

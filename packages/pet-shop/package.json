@@ -1,6 +1,6 @@
 {
   "name": "pet-shop",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "description": "A simple wrapper of Web Storage API",
   "license": "MIT",
   "author": {
@@ -34,6 +34,14 @@
   "type": "module",
   "scripts": {
     "prepublishOnly": "tsc -p tsconfig.build.json"
+  },
+  "peerDependencies": {
+    "miniprogram-api-typings": "^5.2.3"
+  },
+  "peerDependenciesMeta": {
+    "miniprogram-api-typings": {
+      "optional": true
+    }
   },
   "publishConfig": {
     "access": "public",

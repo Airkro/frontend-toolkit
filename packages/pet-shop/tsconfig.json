@@ -1,0 +1,10 @@
+{
+  "extends": "@nice-move/tsconfig/base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
+    "lib": ["ESNext", "DOM"],
+    "types": ["node", "miniprogram-api-typings"],
+  },
+  "include": ["src"],
+}

@@ -1,33 +1,14 @@
-interface StorageLike {
-  getItem(key: string): string | null;
-  setItem(key: string, value: string): void;
-  removeItem(key: string): void;
-  key(index: number): string | null;
-  readonly length: number;
-  clear(): void;
-}
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import type {
+  CacheInstance,
+  CacheOptions,
+  PetShopInstance,
+  PetShopOptions,
+} from './types';
 
-interface PetShopOptions {
-  storage: StorageLike;
-  namespace: string;
-  json?: boolean;
-}
+export type { CacheOptions } from './types';
 
-interface PetShopInstance<T extends Record<string, any> = object> {
-  namespace: string;
-  get<K extends keyof T>(key: K): T[K] | undefined;
-  set<K extends keyof T>(key: K, value: T[K]): void;
-  remove(key: keyof T): void;
-  readonly rawKeys: string[];
-  readonly keys: (keyof T)[];
-  readonly values: T[keyof T][];
-  valueOf(): T;
-  readonly size: number;
-  has(key: keyof T): boolean;
-  clear(): void;
-}
-
-function safeParse<T = any>(string: string): T | undefined {
+function safeParse<T = unknown>(string: string): T | undefined {
   try {
     return JSON.parse(string);
   } catch {
@@ -168,7 +149,7 @@ export function PetShop<T extends Record<string, any> = object>({
       },
       has: {
         enumerable: true,
-        value: function has(key: string): boolean {
+        value: function isHas(key: string): boolean {
           return storage.getItem(`${namespace}.${key}`) !== null;
         },
       },
@@ -210,17 +191,6 @@ export function createProxy<T extends Record<string, any> = object>(
   });
 }
 
-type CacheInstance<
-  T extends Record<string, any>,
-  Keys extends (keyof T)[],
-> = Pick<T, Keys[number]> & {
-  clear(): void;
-};
-
-export interface CacheOptions<T extends Record<string, any>> {
-  expiresAtKey?: keyof T;
-}
-
 export function createCache<
   T extends Record<string, any> = object,
   Keys extends (keyof T)[] = (keyof T)[],
@@ -236,7 +206,7 @@ export function createCache<
       return false;
     }
 
-    const expiresAt = storage.get(expiresAtKey as any);
+    const expiresAt = storage.get(expiresAtKey);
 
     if (expiresAt === undefined || expiresAt === null) {
       return false;

@@ -2,7 +2,15 @@
   "extends": "@nice-move/tsconfig/node-bundle.json",
   "compilerOptions": {
     "outDir": "dist",
-    "rootDir": "src"
+    "rootDir": "src",
+    "lib": [
+      "ESNext",
+      "DOM"
+    ],
+    "types": [
+      "node",
+      "miniprogram-api-typings"
+    ]
   },
   "include": [
     "src"
