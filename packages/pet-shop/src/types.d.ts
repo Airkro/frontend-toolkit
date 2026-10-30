@@ -1,10 +1,14 @@
+/// <reference lib="dom" />
+
 interface PetShopOptions {
   storage: Storage
   namespace: string
   json?: boolean
 }
 
-interface PetShopInstance<T extends Record<string, unknown> = object> {
+interface PetShopInstance<
+  T extends Record<string, unknown> = Record<string, unknown>,
+> {
   namespace: string
   get<K extends keyof T>(key: K): T[K] | undefined
   set<K extends keyof T>(key: K, value: T[K]): void
@@ -19,13 +23,15 @@ interface PetShopInstance<T extends Record<string, unknown> = object> {
 }
 
 type CacheInstance<
-  T extends Record<string, unknown>,
-  Keys extends (keyof T)[],
+  T extends Record<string, unknown> = Record<string, unknown>,
+  Keys extends (keyof T)[] = (keyof T)[],
 > = Pick<T, Keys[number]> & {
   clear(): void
 }
 
-interface CacheOptions<T extends Record<string, unknown>> {
+interface CacheOptions<
+  T extends Record<string, unknown> = Record<string, unknown>,
+> {
   expiresAtKey?: keyof T
 }
 

@@ -1,4 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/// <reference lib="dom" />
+
 import type {
   CacheInstance,
   CacheOptions,
@@ -16,11 +17,9 @@ function safeParse<T = unknown>(string: string): T | undefined {
   }
 }
 
-export function PetShop<T extends Record<string, any> = object>({
-  storage,
-  namespace,
-  json = false,
-}: PetShopOptions): PetShopInstance<T> {
+export function PetShop<
+  T extends Record<string, unknown> = Record<string, unknown>,
+>({ storage, namespace, json = false }: PetShopOptions): PetShopInstance<T> {
   const store = Object.defineProperties(
     {},
     {
@@ -167,9 +166,9 @@ export function PetShop<T extends Record<string, any> = object>({
   return store as PetShopInstance<T>;
 }
 
-export function createProxy<T extends Record<string, any> = object>(
-  storage: PetShopInstance<T>,
-): T {
+export function createProxy<
+  T extends Record<string, unknown> = Record<string, unknown>,
+>(storage: PetShopInstance<T>): T {
   return new Proxy({} as T, {
     get(_target, key: string) {
       return storage.get(key);
@@ -192,7 +191,7 @@ export function createProxy<T extends Record<string, any> = object>(
 }
 
 export function createCache<
-  T extends Record<string, any> = object,
+  T extends Record<string, unknown> = Record<string, unknown>,
   Keys extends (keyof T)[] = (keyof T)[],
 >(
   storage: PetShopInstance<T>,
